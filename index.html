@@ -23,6 +23,401 @@ body {
     overflow-x: hidden;
 }
 
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    background:
+        radial-gradient(circle at 50% 20%, #3b125c 0%, #12051c 40%, #050207 100%);
+}
+
+.moon {
+    position: fixed;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: #ffd98a;
+    box-shadow: 0 0 50px #ff8c00;
+    top: 8%;
+    right: 10%;
+}
+
+.fog {
+    position: fixed;
+    width: 200%;
+    height: 35%;
+    left: -50%;
+    bottom: 0;
+    background: radial-gradient(ellipse, rgba(180,180,180,.15), transparent 65%);
+    filter: blur(25px);
+    animation: fogMove 12s infinite alternate ease-in-out;
+}
+
+@keyframes fogMove {
+    from { transform: translateX(-5%); }
+    to { transform: translateX(5%); }
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 10vw, 100px);
+    color: #ff7518;
+    text-shadow: 0 0 10px #ff7518, 0 0 30px #ff4500, 0 0 60px #ff4500;
+    animation: glow 2s infinite alternate;
+}
+
+.hero p {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #ddd;
+}
+
+@keyframes glow {
+    from { transform: scale(1); }
+    to { transform: scale(1.04); }
+}
+
+.bat {
+    position: fixed;
+    font-size: 35px;
+    z-index: -1;
+    animation: fly 12s linear infinite;
+}
+
+.bat:nth-child(1) {
+    top: 20%;
+}
+
+.bat:nth-child(2) {
+    top: 45%;
+    animation-delay: 4s;
+}
+
+.bat:nth-child(3) {
+    top: 70%;
+    animation-delay: 7s;
+}
+
+@keyframes fly {
+    0% {
+        left: -10%;
+        transform: rotate(10deg);
+    }
+    50% {
+        left: 50%;
+        transform: rotate(-10deg) translateY(-50px);
+    }
+    100% {
+        left: 110%;
+        transform: rotate(10deg);
+    }
+}
+
+.section {
+    min-height: 80vh;
+    padding: 120px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    max-width: 800px;
+    padding: 50px;
+    border-radius: 25px;
+    background: rgba(20, 5, 30, .75);
+    border: 1px solid rgba(255,117,24,.5);
+    box-shadow: 0 0 40px rgba(255,69,0,.2);
+    backdrop-filter: blur(8px);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: 1s;
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card h2 {
+    color: #ff7518;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.card p {
+    color: #ddd;
+    line-height: 1.7;
+    font-size: 18px;
+}
+
+.pumpkin {
+    font-size: 70px;
+    margin: 30px;
+    animation: pumpkinFloat 3s infinite ease-in-out;
+}
+
+@keyframes pumpkinFloat {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-20px) rotate(3deg); }
+}
+
+.bottom {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.warning {
+    font-size: 25px;
+    color: #ff7518;
+    animation: warning 1s infinite alternate;
+}
+
+@keyframes warning {
+    from { opacity: .5; }
+    to { opacity: 1; }
+}
+
+/* JUMPSCARE */
+.jumpscare {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.jumpscare.active {
+    visibility: visible;
+    animation: scare .7s forwards;
+}
+
+.jumpscare.hide {
+    animation: scareOut .8s forwards;
+}
+
+.scare-content {
+    text-align: center;
+}
+
+.face {
+    font-size: min(60vw, 500px);
+    filter: drop-shadow(0 0 40px red);
+}
+
+.buuu {
+    margin-top: -30px;
+    font-size: clamp(50px, 12vw, 120px);
+    font-weight: 900;
+    color: #ff2222;
+    text-shadow: 0 0 10px red, 0 0 30px red;
+    letter-spacing: 8px;
+}
+
+@keyframes scare {
+    0% {
+        opacity: 0;
+        transform: scale(2);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(.8);
+    }
+    40% {
+        transform: scale(1.3);
+    }
+    60% {
+        transform: scale(.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scareOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1.5);
+        visibility: hidden;
+    }
+}
+
+@media(max-width: 600px) {
+    .moon {
+        width: 110px;
+        height: 110px;
+    }
+
+    .card {
+        padding: 30px 20px;
+    }
+
+    .card h2 {
+        font-size: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="moon"></div>
+<div class="fog"></div>
+
+<div class="bat">🦇</div>
+<div class="bat">🦇</div>
+<div class="bat">🦇</div>
+
+<section class="hero">
+    <h1>🎃 HALLOWEEN RP 🎃</h1>
+    <p>Witaj w najbardziej tajemniczym miejscu tej jesieni 👻</p>
+    <div class="pumpkin">🎃</div>
+</section>
+
+<section class="section">
+    <div class="card">
+        <h2>👻 Witaj!</h2>
+        <p>
+            Przygotuj się na halloweenową przygodę.
+            Im dalej wejdziesz, tym dziwniejsza stanie się ta strona...
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="card">
+        <h2>🕷️ Co tutaj znajdziesz?</h2>
+        <p>
+            Tajemnicze miejsca, halloweenowy klimat,
+            animacje oraz kilka rzeczy, których lepiej nie odkrywać...
+        </p>
+        <div class="pumpkin">🎃</div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="card">
+        <h2>🌑 Schodzisz coraz niżej...</h2>
+        <p>Jesteś pewien, że chcesz iść dalej?</p>
+    </div>
+</section>
+
+<section class="bottom">
+    <div>
+        <div class="warning">⚠️ NIE SCHODŹ DALEJ ⚠️</div>
+        <p style="margin-top:20px;color:#777;">
+            Przewiń jeszcze niżej...
+        </p>
+    </div>
+</section>
+
+<div class="jumpscare" id="jumpscare">
+    <div class="scare-content">
+        <div class="face">😈</div>
+        <div class="buuu">BUUUU!</div>
+    </div>
+</div>
+
+<script>
+
+const cards = document.querySelectorAll(".card");
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+}, { threshold: 0.2 });
+
+cards.forEach(card => observer.observe(card));
+
+let scareDone = false;
+
+window.addEventListener("scroll", () => {
+
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollPosition >= pageHeight - 20 && !scareDone) {
+
+        scareDone = true;
+
+        const scare = document.getElementById("jumpscare");
+
+        scare.classList.remove("hide");
+        scare.classList.add("active");
+
+        if (navigator.vibrate) {
+            navigator.vibrate([150, 80, 200]);
+        }
+
+        /* JUMPSCARE ZNIKA PO 3 SEKUNDACH */
+        setTimeout(() => {
+            scare.classList.remove("active");
+            scare.classList.add("hide");
+
+            /* Można ponownie wywołać po przewinięciu od początku */
+            setTimeout(() => {
+                scare.classList.remove("hide");
+            }, 800);
+
+        }, 3000);
+    }
+});
+
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halloween RP 🎃</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #08030d;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
 /* HALLOWEENOWE TŁO */
 .background {
     position: fixed;
